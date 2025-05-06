@@ -43,7 +43,7 @@ void AttendanceDBAbstraction::createAttendanceRecordsTable() {
     }
 }
 //--
-void AttendanceDBAbstraction::insertStudent(int studentID, string first, string last) {
+void AttendanceDBAbstraction::insertStudent(string first, string last) {
     //query to insert a user
     string sql = "INSERT INTO Students (first, last) VALUES (?, ?);";
  
@@ -68,7 +68,7 @@ void AttendanceDBAbstraction::insertStudent(int studentID, string first, string 
     }
 }
 //--
-void AttendanceDBAbstraction::insertCourse(int courseID, string name, string semester, int year, string meetingSchedule, string startTime, string endTime, string instructor) {
+void AttendanceDBAbstraction::insertCourse(string name, string semester, int year, string meetingSchedule, string startTime, string endTime, string instructor) {
     //query to insert a user
     string sql = "INSERT INTO Courses (name, semester, year, meetingSchedule, startTime, endTime, instructor) VALUES (?, ?, ?, ?, ?, ?, ?);";
  
@@ -98,7 +98,7 @@ void AttendanceDBAbstraction::insertCourse(int courseID, string name, string sem
     }
 }
 //--
-void AttendanceDBAbstraction::insertAttendanceRecord(int attendanceID, string meetingDate, string meetingTime, string attendanceStatus) {
+void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus) {
     //query to insert a user
     string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus) VALUES (?, ?, ?);";
  

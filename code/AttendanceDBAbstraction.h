@@ -7,5 +7,9 @@ class AttendanceDBAbstraction : DBAbstraction {
 public:
     AttendanceDBAbstraction(string pathToFile);
     
-protected:
+private:
+    void createStudentsTable();
+    void createClassesTable();
+    void createStudentsInClassTable();
+    void createAttendanceTable();
 };

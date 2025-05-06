@@ -10,8 +10,7 @@ AttendanceDBAbstraction::AttendanceDBAbstraction(string pathToFile)
     //create the attendance tables
     createStudentsTable();
     createClassesTable();
-    createStudentsInClassTable();
-    createAttendanceTable();
+    createAttendanceRecordTable();
 }
 //--
 void AttendanceDBAbstraction::createStudentsTable(){
@@ -22,11 +21,7 @@ void AttendanceDBAbstraction::createClassesTable(){
     
 }
 //--
-void AttendanceDBAbstraction::createStudentsInClassTable(){
-    
-}
-//--
-void AttendanceDBAbstraction::createAttendanceTable(){
+void AttendanceDBAbstraction::createAttendanceRecordTable(){
     
 }
 //--

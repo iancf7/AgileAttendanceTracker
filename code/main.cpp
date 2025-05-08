@@ -81,7 +81,7 @@ void addClass() {
     cin >> endTime;
 
     cout<<"Enter in the name of the course instructor: "<<endl;
-    cin >> endTime;
+    cin >> instructor;
 
     //Add to database
 

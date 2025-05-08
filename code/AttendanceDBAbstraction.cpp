@@ -124,17 +124,15 @@ void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string 
     }
 }
 //--
-//TODO 
 void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId, string date) {
     // pick a course, pick a day, show all absences for that given day 
 
     // query to get all attendance records for a given class
-    string sql = "SELECT * FROM AttendanceRecords WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?"; 
+    string sql = "SELECT Students.firstName, Students.lastName, AttendanceRecords.attendanceStatus, Courses.courseName, AttendanceRecords.meetingDate FROM AttendanceRecords WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?"; 
     
     // create a statement pointer
     sqlite3_stmt* myStatement; 
 
-    //TODO
     //get a statement to iterate through 
 	if (prepareQueryWithResults(sql, myStatement)) 
 	{ 
@@ -144,12 +142,17 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
 		//while there are more rows 
 		while (statusOfStep == SQLITE_ROW) 
 		{ 
-			//get item name 
-            // make a string for EVERY item we want to print (course name, course date, student first and last, attendancestatus)
-			string itemName((char*)sqlite3_column_text(myStatement, 0)); 
- 
-			//print out the item info 
-			cout << "tbd" << endl; 
+            string firstName = ((char*)sqlite3_column_text(myStatement, 0));   // 0 = column 1
+            string lastName = ((char*)sqlite3_column_text(myStatement, 1));    // 1 = column 2
+            string status = ((char*)sqlite3_column_text(myStatement, 2));      // 2 = column 3
+            string courseName = ((char*)sqlite3_column_text(myStatement, 3));  // 3 = column 4
+            string meetingDate = ((char*)sqlite3_column_text(myStatement, 4)); // 4 = column 5
+	
+			//print out the display
+			cout << "Course: " << courseName
+                 << " | Date: " << meetingDate
+                 << " | Student: " << firstName << " " << lastName
+                 << " | Status: " << status << endl; 
  
 			//get the next row 
 			statusOfStep = sqlite3_step(myStatement); 

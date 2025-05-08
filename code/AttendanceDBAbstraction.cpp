@@ -171,47 +171,44 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
 	} 
 }
 //--
-//TODO 
 void AttendanceDBAbstraction::getMostFrequentlyAbsent() {
     //list all students, with the top being the student with the most absences, and then descending down from there. 
 
-	float mostAbsent = 0.0; 
- 
 	//query to get the students with the most absences
-    //check if this works 
-	string sql = "SELECT Student.studentId, Student.firstName, Student.lastName, COUNT(AttendanceStatus) AS AbsenceCount"
+	string sql = "SELECT Students.studentId, Students.firstName, Students.lastName, COUNT(*) AS absenceCount"
                  "FROM AttendanceRecord"
                  "JOIN Students ON Students.studentId = AttendanceRecords.studentId"
-                 "WHERE AttendanceRecord.studentId = ?"
-                 "ORDER BY AttendanceRecord.AbsenceCount DESC;"; 
+                 "WHERE AttendanceRecord.attendanceStatus = 'Absent'"
+                 "GROUP BY AttendanceRecords.studentId"
+                 "ORDER BY absenceCount DESC;"; 
  
 	//create a statement pointer 
 	sqlite3_stmt* myStatement; 
  
 	//get a statement to iterate through 
 	if (prepareQueryWithResults(sql, myStatement)) 
-	{ 
-		//bind the parameter 
-		sqlite3_bind_int(myStatement, 1, studentId); 
- 
+	{
 		//get a row from the query 
 		int statusOfStep = sqlite3_step(myStatement); 
  
-		//if there is a row 
-		if (statusOfStep == SQLITE_ROW) 
-		{ 
-			//get the highest bid 
-			mostAbsent = sqlite3_column_double(myStatement, 0); 
-		} 
- 
+		//while there are more rows 
+		while (statusOfStep == SQLITE_ROW) 
+        { 
+            
+            int studentId = sqlite3_column_int(myStatement, 0);           // 0 = column 1
+            string firstName((char*)sqlite3_column_text(myStatement, 0)); // 1 = column 2
+            string lastName((char*)sqlite3_column_text(myStatement, 1));  // 2 = column 3
+            int absenceCount = sqlite3_column_int(myStatement, 3);        // 3 = column 4
+            
+            //print out the display
+            cout << "Student ID: " << studentId
+            << " | Student: " << firstName << " " << lastName
+            << " | Absences: " << absenceCount << endl; 
+            
+			//get the next row 
+			statusOfStep = sqlite3_step(myStatement); 
+        }
 		//clean up and destroy the statement 
 		sqlite3_finalize(myStatement); 
 	} 
- 
-	return mostAbsent; 
-}
-//--
-//TODO 
-void AttendanceDBAbstraction:: {
-
 }

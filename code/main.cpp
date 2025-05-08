@@ -9,9 +9,9 @@ void takeAttendance();
 
 int main()
 {
-    int selection = 1;
+    string selection = "1";
     
-    while(selection != 5) {
+    while(selection != "5") {
 
         cout<<"======================================"<<endl;
         cout<<"= Welcome to the Attendance Tracker! ="<<endl;
@@ -26,20 +26,24 @@ int main()
 
         cin >> selection;
 
-        if(selection == 1) {
+        if(selection == "1") {
             addClass();
         }
 
-        if(selection == 2) {
+        if(selection == "2") {
             addStudent();
         }
 
-        if(selection == 3) {
+        if(selection == "3") {
             viewStudents();
         }
 
-        if(selection == 4) {
+        if(selection == "4") {
             takeAttendance();
+        }
+
+        if(selection >= "a" && selection <= "Z") {
+            selection = "1";
         }
 
     }
@@ -52,7 +56,7 @@ void addClass() {
 
     string courseName;
     string semesterOffered;
-    int yearOffered;
+    string yearOffered;
     string meetingSchedule;
     string startTime;
     string endTime;
@@ -64,7 +68,7 @@ void addClass() {
     cout<<"Enter in the semester the course is offered (ex: Fall)"<<endl;
     cin >> semesterOffered;
 
-    cout<<"Enter in the year the course is offered: "<<endl;
+    cout<<"Enter in the year the course is offered: (Just a number)"<<endl;
     cin >> yearOffered;
 
     cout<<"Enter in the meeting schedule: (ex: MWF, TTR)"<<endl;

@@ -19,7 +19,7 @@ void AttendanceDBAbstraction::createStudentsTable() {
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
     {
-        cout << "Error creating Items table" << endl;
+        cout << "Error creating Students table" << endl;
     }
 }
 //--
@@ -29,7 +29,7 @@ void AttendanceDBAbstraction::createCoursesTable() {
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
     {
-        cout << "Error creating Items table" << endl;
+        cout << "Error creating Courses table" << endl;
     }
 }
 //--
@@ -39,7 +39,7 @@ void AttendanceDBAbstraction::createAttendanceRecordsTable() {
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
     {
-        cout << "Error creating Items table" << endl;
+        cout << "Error creating AttendanceRecords table" << endl;
     }
 }
 //--
@@ -63,7 +63,7 @@ void AttendanceDBAbstraction::insertStudent(string first, string last) {
         //execute the query to insert a new user
         if (!executeQueryNoResultsBack(myStatement))
         {
-            cout << "Error inserting into AuctionSiteUsers" << endl;
+            cout << "Error inserting into Students" << endl;
         }
     }
 }
@@ -93,7 +93,7 @@ void AttendanceDBAbstraction::insertCourse(string name, string semester, int yea
         //execute the query to insert a new user
         if (!executeQueryNoResultsBack(myStatement))
         {
-            cout << "Error inserting into AuctionSiteUsers" << endl;
+            cout << "Error inserting into Courses" << endl;
         }
     }
 }
@@ -119,7 +119,7 @@ void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string 
         //execute the query to insert a new user
         if (!executeQueryNoResultsBack(myStatement))
         {
-            cout << "Error inserting into AuctionSiteUsers" << endl;
+            cout << "Error inserting into AttendanceRecords" << endl;
         }
     }
 }

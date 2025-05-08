@@ -43,9 +43,9 @@ void AttendanceDBAbstraction::createAttendanceRecordsTable() {
     }
 }
 //--
-void AttendanceDBAbstraction::insertStudent(string first, string last) {
+void AttendanceDBAbstraction::insertStudent(string firstName, string lastName) {
     //query to insert a user
-    string sql = "INSERT INTO Students (first, last) VALUES (?, ?);";
+    string sql = "INSERT INTO Students (firstName, lastName) VALUES (?, ?);";
  
     //create a statement pointer
     sqlite3_stmt* myStatement;
@@ -57,8 +57,8 @@ void AttendanceDBAbstraction::insertStudent(string first, string last) {
     if (statusOfPrep == SQLITE_OK)
     {
         //add parameters
-        sqlite3_bind_text(myStatement, 1, first.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(myStatement, 2, last.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_text(myStatement, 1, firstName.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_text(myStatement, 2, lastName.c_str(), -1, SQLITE_STATIC);
  
         //execute the query to insert a new user
         if (!executeQueryNoResultsBack(myStatement))

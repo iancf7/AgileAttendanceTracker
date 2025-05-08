@@ -14,7 +14,7 @@ AttendanceDBAbstraction::AttendanceDBAbstraction(string pathToFile)
 }
 //--
 void AttendanceDBAbstraction::createStudentsTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS Students (id INTEGER PRIMARY KEY NOT NULL, firstName TEXT, lastName TEXT);";
+    string sql = "CREATE TABLE IF NOT EXISTS Students (studentId INTEGER PRIMARY KEY NOT NULL, firstName TEXT, lastName TEXT);";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -24,7 +24,7 @@ void AttendanceDBAbstraction::createStudentsTable() {
 }
 //--
 void AttendanceDBAbstraction::createCoursesTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS Courses (id INTEGER PRIMARY KEY NOT NULL, name TEXT, semester TEXT, year INTEGER, meetingSchedule TEXT, startTime TEXT, endTime TEXT, instructor TEXT);";
+    string sql = "CREATE TABLE IF NOT EXISTS Courses (courseId INTEGER PRIMARY KEY NOT NULL, name TEXT, semester TEXT, year INTEGER, meetingSchedule TEXT, startTime TEXT, endTime TEXT, instructor TEXT);";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -34,7 +34,7 @@ void AttendanceDBAbstraction::createCoursesTable() {
 }
 //--
 void AttendanceDBAbstraction::createAttendanceRecordsTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS AttendanceRecords (id INTEGER PRIMARY KEY NOT NULL, meetingDate TEXT, meetingTime TEXT, attendanceStatus TEXT);";
+    string sql = "CREATE TABLE IF NOT EXISTS AttendanceRecords (attendanceRecordId INTEGER PRIMARY KEY NOT NULL, meetingDate TEXT, meetingTime TEXT, attendanceStatus TEXT);";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -124,9 +124,12 @@ void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string 
     }
 }
 //--
-void AttendanceDBAbstraction::getAllAttendanceRecordsByClass() {
+//TODO 
+void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId, string date) {
+    // pick a course, pick a day, show all absences for that given day 
+
     // query to get all attendance records for a given class
-    string sql = "SELECT * FROM AttendanceRecords WHERE Attendance Records.Course"; 
+    string sql = "SELECT * FROM AttendanceRecords WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?"; 
     
     // create a statement pointer
     sqlite3_stmt* myStatement; 
@@ -142,6 +145,7 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByClass() {
 		while (statusOfStep == SQLITE_ROW) 
 		{ 
 			//get item name 
+            // make a string for EVERY item we want to print (course name, course date, student first and last, attendancestatus)
 			string itemName((char*)sqlite3_column_text(myStatement, 0)); 
  
 			//print out the item info 
@@ -156,6 +160,43 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByClass() {
 	} 
 }
 //--
-void AttendanceDBAbstraction::getAllAttendanceRecordsByStudent() {
+//TODO 
+void AttendanceDBAbstraction::getMostFrequentlyAbsent() {
+    //list all students, with the top being the student with the most absences, and then descending down from there. 
+
+	float mostAbsent = 0.0; 
+ 
+	//query to get the students with the most absences
+    //check if this works 
+	string sql = "SELECT Student.studentId, Student.firstName, Student.lastName, COUNT(AttendanceStatus) AS AbsenceCount FROM AttendanceRecord WHERE AttendanceRecord.studentId = ? ORDER BY AttendanceRecord.AbsenceCount DESC;"; 
+ 
+	//create a statement pointer 
+	sqlite3_stmt* myStatement; 
+ 
+	//get a statement to iterate through 
+	if (prepareQueryWithResults(sql, myStatement)) 
+	{ 
+		//bind the parameter 
+		sqlite3_bind_int(myStatement, 1, studentId); 
+ 
+		//get a row from the query 
+		int statusOfStep = sqlite3_step(myStatement); 
+ 
+		//if there is a row 
+		if (statusOfStep == SQLITE_ROW) 
+		{ 
+			//get the highest bid 
+			mostAbsent = sqlite3_column_double(myStatement, 0); 
+		} 
+ 
+		//clean up and destroy the statement 
+		sqlite3_finalize(myStatement); 
+	} 
+ 
+	return mostAbsent; 
+}
+//--
+//TODO 
+void AttendanceDBAbstraction:: {
 
 }

@@ -10,8 +10,8 @@ public:
     void insertStudent(string firstName, string lastName);
     void insertCourse(string name, string semester, int year, string meetingSchedule, string startTime, string endTime, string instructor);
     void insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus);
-    void getAllAttendanceRecordsByClass();
-    void getAllAttendanceRecordsByStudent();
+    void getAllAttendanceRecordsByCourseByDate(int courseId, string date);
+    void getMostFrequentlyAbsent(); 
     
 private:
     void createStudentsTable();

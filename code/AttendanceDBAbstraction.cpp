@@ -123,3 +123,39 @@ void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string 
         }
     }
 }
+//--
+void AttendanceDBAbstraction::getAllAttendanceRecordsByClass() {
+    // query to get all attendance records for a given class
+    string sql = "SELECT * FROM AttendanceRecords WHERE Attendance Records.Course"; 
+    
+    // create a statement pointer
+    sqlite3_stmt* myStatement; 
+
+    //TODO
+    //get a statement to iterate through 
+	if (prepareQueryWithResults(sql, myStatement)) 
+	{ 
+		//get a row from the query 
+		int statusOfStep = sqlite3_step(myStatement); 
+ 
+		//while there are more rows 
+		while (statusOfStep == SQLITE_ROW) 
+		{ 
+			//get item name 
+			string itemName((char*)sqlite3_column_text(myStatement, 0)); 
+ 
+			//print out the item info 
+			cout << "tbd" << endl; 
+ 
+			//get the next row 
+			statusOfStep = sqlite3_step(myStatement); 
+		} 
+ 
+		//clean up and destroy the statement 
+		sqlite3_finalize(myStatement); 
+	} 
+}
+//--
+void AttendanceDBAbstraction::getAllAttendanceRecordsByStudent() {
+
+}

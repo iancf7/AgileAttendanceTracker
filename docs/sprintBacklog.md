@@ -16,3 +16,4 @@
 |---------|------------------|---------------|-------------|--------|--------------|
 | T-1 | Create ER Diagram and Schema for Database | US-1 | Sarah | Done | None |
 | T-2 | Create class for the Database and methods to retrieve information | US-1 | Matt | In Progress | T-1 |
+| T-3 | Create menuing system that the user interacts with when running the program | US-1 | Ian | In Progress | None |

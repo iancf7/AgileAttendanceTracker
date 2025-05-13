@@ -164,7 +164,7 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
                  "   FROM AttendanceRecords "
                  "   JOIN Students ON Students.studentId = AttendanceRecords.studentId "
                  "   JOIN Courses ON Courses.courseId = AttendanceRecords.courseId "
-                 "   WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?";
+                 "   WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?;";
     
     // create a statement pointer
     sqlite3_stmt* myStatement; 
@@ -233,11 +233,12 @@ void AttendanceDBAbstraction::getMostFrequentlyAbsent(int courseId) {
  
 		//while there are more rows 
 		while (statusOfStep == SQLITE_ROW) 
-        {
-            int studentId = sqlite3_column_int(myStatement, 0);           // 0 = column 1
-            string firstName((char*)sqlite3_column_text(myStatement, 1)); // 1 = column 2
-            string lastName((char*)sqlite3_column_text(myStatement, 2));  // 2 = column 3
-            int absenceCount = sqlite3_column_int(myStatement, 3);        // 3 = column 4
+        {         
+            int courseId = sqlite3_column_int(myStatement, 0);  
+            int studentId = sqlite3_column_int(myStatement, 1);           // 0 = column 1
+            string firstName((char*)sqlite3_column_text(myStatement, 2)); // 1 = column 2
+            string lastName((char*)sqlite3_column_text(myStatement, 3));  // 2 = column 3
+            int absenceCount = sqlite3_column_int(myStatement, 4);        // 3 = column 4
             
             //print out the display
             cout << "Student ID: " << studentId

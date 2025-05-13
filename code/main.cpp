@@ -62,6 +62,10 @@ void addClass() {
     string endTime;
     string instructor;
 
+    cout<<"======================================"<<endl;
+    cout<<"=             New Class              ="<<endl;
+    cout<<"======================================"<<endl;
+
     cout<<"Enter in the name of the course: "<<endl;
     cin >> courseName;
 
@@ -85,6 +89,8 @@ void addClass() {
 
     //Add to database
 
+    cout<<"Class successfully added! ✓";
+
 
 }
 
@@ -93,24 +99,35 @@ void addStudent() {
     string firstName;
     string lastName;
 
+    cout<<"======================================"<<endl;
+    cout<<"=            New Student             ="<<endl;
+    cout<<"======================================"<<endl;
+
     cout<<"Enter in the student's first name: "<<endl;
     cin >> firstName;
 
     cout<<"Enter in the student's last name: "<<endl;
     cin >> lastName;
-    
+
     //Add to database
+
+    cout<<"Student successfully added! ✓";
 
 }
 
 void viewStudents() {
 
-    
+    cout<<"======================================"<<endl;
+    cout<<"=           View Students            ="<<endl;
+    cout<<"======================================"<<endl;
 
 
 }
 
 void takeAttendance() {
 
+    cout<<"======================================"<<endl;
+    cout<<"=          Take Attendance           ="<<endl;
+    cout<<"======================================"<<endl;
 
 }

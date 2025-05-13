@@ -17,8 +17,7 @@ void AttendanceDBAbstraction::createStudentsTable() {
     string sql = "CREATE TABLE IF NOT EXISTS Students ( "
                  "  studentId INTEGER PRIMARY KEY NOT NULL, "
                  "  firstName TEXT, "
-                 "  lastName TEXT, "
-                 "  attendanceRecordId INTEGER "
+                 "  lastName TEXT "
                  ");";
      
     //execute the query to create the table
@@ -37,8 +36,7 @@ void AttendanceDBAbstraction::createCoursesTable() {
                  "  meetingSchedule TEXT, "
                  "  startTime TEXT, "
                  "  endTime TEXT, " 
-                 "  instructor TEXT, "
-                 "  attendanceRecordId INTEGER "
+                 "  instructor TEXT "
                  ");";
      
     //execute the query to create the table

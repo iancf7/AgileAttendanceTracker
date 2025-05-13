@@ -38,7 +38,7 @@ int main()
         }
 
         if(selection == "3") {
-            viewStudents();
+            viewAttendance();
         }
 
         if(selection == "4") {
@@ -136,13 +136,13 @@ void addStudent() {
     }
 }
 
-void viewStudents() {
+void viewAttendance() {
 
     string courseID;
     string date;
 
     cout<<"======================================"<<endl;
-    cout<<"=           View Students            ="<<endl;
+    cout<<"=           View Attendance          ="<<endl;
     cout<<"======================================"<<endl;
 
     //Print out all courses and their ID's
@@ -163,7 +163,7 @@ void viewStudents() {
 
     if(answer == "y") {
 
-        viewStudents();
+        viewAttendance();
     }
 }
 

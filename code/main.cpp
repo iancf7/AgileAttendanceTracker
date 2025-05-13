@@ -91,7 +91,15 @@ void addClass() {
 
     cout<<"Class successfully added! ✓";
 
+    string answer;
 
+    cout<<"Would you like to add another class? (y/n)"<<endl;
+    cin >> answer;
+
+    if(answer == "y") {
+
+        addClass();
+    }
 }
 
 void addStudent() {
@@ -113,15 +121,43 @@ void addStudent() {
 
     cout<<"Student successfully added! ✓";
 
+    string answer;
+
+    cout<<"Would you like to add another class? (y/n)"<<endl;
+    cin >> answer;
+
+    if(answer == "y") {
+
+        addStudent();
+    }
 }
 
 void viewStudents() {
+
+    string courseID;
+    string date;
 
     cout<<"======================================"<<endl;
     cout<<"=           View Students            ="<<endl;
     cout<<"======================================"<<endl;
 
+    cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
+    cin >> courseID;
 
+    cout<<"Enter in the day that you want to view attendance for: (format: MM/DD/YYYY)"<<endl;
+    cin >> date;
+
+    //Query Database
+
+    string answer;
+
+    cout<<"Would you like to view another attendance record? (y/n)"<<endl;
+    cin >> answer;
+
+    if(answer == "y") {
+
+        viewStudents();
+    }
 }
 
 void takeAttendance() {

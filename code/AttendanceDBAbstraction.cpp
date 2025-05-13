@@ -14,8 +14,7 @@ AttendanceDBAbstraction::AttendanceDBAbstraction(string pathToFile)
 }
 //--
 void AttendanceDBAbstraction::createStudentsTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS Students (studentId INTEGER PRIMARY KEY NOT NULL, firstName TEXT, lastName TEXT, attendanceRecordId INTEGER"
-                 "FOREIGN KEY(attendanceRecordId) REFERENCES AttendanceRecords(attendanceRecordId);";
+    string sql = "CREATE TABLE IF NOT EXISTS Students (studentId INTEGER PRIMARY KEY NOT NULL, firstName TEXT, lastName TEXT, attendanceRecordId INTEGER);";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -25,8 +24,7 @@ void AttendanceDBAbstraction::createStudentsTable() {
 }
 //--
 void AttendanceDBAbstraction::createCoursesTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS Courses (courseId INTEGER PRIMARY KEY NOT NULL, name TEXT, semester TEXT, year INTEGER, meetingSchedule TEXT, startTime TEXT, endTime TEXT, instructor TEXT, attendanceRecordId INTEGER"
-                 "FOREIGN KEY(attendanceRecordId) REFERENCES AttendanceRecords(attendanceRecordId);";
+    string sql = "CREATE TABLE IF NOT EXISTS Courses (courseId INTEGER PRIMARY KEY NOT NULL, name TEXT, semester TEXT, year INTEGER, meetingSchedule TEXT, startTime TEXT, endTime TEXT, instructor TEXT, attendanceRecordId INTEGER);";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -37,7 +35,9 @@ void AttendanceDBAbstraction::createCoursesTable() {
 //--
 void AttendanceDBAbstraction::createAttendanceRecordsTable() {
     string sql = "CREATE TABLE IF NOT EXISTS AttendanceRecords ("
-                 "attendanceRecordId INTEGER PRIMARY KEY NOT NULL, meetingDate TEXT, meetingTime TEXT, attendanceStatus TEXT);";
+                 "attendanceRecordId INTEGER PRIMARY KEY NOT NULL, meetingDate TEXT, meetingTime TEXT, attendanceStatus TEXT, courseId INTEGER, studentId INTEGER"
+                 "FOREIGN KEY(courseId) REFERENCES Courses(courseId)"
+                 "FOREIGN KEY(studentId) REFERENCES Students(studentId);";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -103,7 +103,7 @@ void AttendanceDBAbstraction::insertCourse(string name, string semester, int yea
 //--
 void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus) {
     //query to insert a user
-    string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus) VALUES (?, ?, ?);";
+    string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus, courseId, studentId) VALUES (?, ?, ?);";
  
     //create a statement pointer
     sqlite3_stmt* myStatement;

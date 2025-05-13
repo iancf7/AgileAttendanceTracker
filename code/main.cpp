@@ -4,7 +4,7 @@ using namespace std;
 
 void addClass();
 void addStudent();
-void viewStudents();
+void viewAttendance();
 void takeAttendance();
 
 int main()

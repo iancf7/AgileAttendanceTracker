@@ -13,6 +13,6 @@
   - **Start:**
     - Priority #1: finish Database and SQL queries.
   - **Stop:**
-    - 
+    - N/A
   - **Continue:**
     - Communicating effectively

@@ -4,7 +4,8 @@ using namespace std;
 
 int main()
 {
-    cout<<"Agile Project"<<endl;
+    AttendanceDBAbstraction db("/Users/maddi/Downloads/Attendance.sqlite");
+
     return 0;
     
 }

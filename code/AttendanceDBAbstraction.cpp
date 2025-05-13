@@ -34,10 +34,16 @@ void AttendanceDBAbstraction::createCoursesTable() {
 }
 //--
 void AttendanceDBAbstraction::createAttendanceRecordsTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS AttendanceRecords ("
-                 "attendanceRecordId INTEGER PRIMARY KEY NOT NULL, meetingDate TEXT, meetingTime TEXT, attendanceStatus TEXT, courseId INTEGER, studentId INTEGER"
-                 "FOREIGN KEY(courseId) REFERENCES Courses(courseId)"
-                 "FOREIGN KEY(studentId) REFERENCES Students(studentId);";
+    string sql = "CREATE TABLE IF NOT EXISTS AttendanceRecords ( "
+                 "  attendanceRecordId INTEGER PRIMARY KEY NOT NULL, "
+                 "  meetingDate TEXT, "
+                 "  meetingTime TEXT, "
+                 "  attendanceStatus TEXT, "
+                 "  courseId INTEGER, "
+                 "  studentId INTEGER, "
+                 "  FOREIGN KEY(courseId) REFERENCES Courses(courseId), "
+                 "  FOREIGN KEY(studentId) REFERENCES Students(studentId) "
+                 ");";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))

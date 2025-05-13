@@ -155,24 +155,24 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
     // pick a course, pick a day, show all absences for that given day 
 
     // query to get all attendance records for a given class
-    string sql = "SELECT "
+    string sql = "   SELECT "
                  "   Students.firstName, "
                  "   Students.lastName, "
                  "   AttendanceRecords.attendanceStatus, "
                  "   Courses.name, "
-                 "   AttendanceRecords.meetingDate"
-                 "FROM AttendanceRecords" 
-                 "JOIN Students ON Students.studentId = AttendanceRecords.studentId"
-                 "JOIN Courses ON Courses.courseId = AttendanceRecords.courseId"
-                 "WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?"; 
+                 "   AttendanceRecords.meetingDate "
+                 "   FROM AttendanceRecords "
+                 "   JOIN Students ON Students.studentId = AttendanceRecords.studentId "
+                 "   JOIN Courses ON Courses.courseId = AttendanceRecords.courseId "
+                 "   WHERE AttendanceRecords.courseId = ? AND AttendanceRecords.meetingDate = ?";
     
     // create a statement pointer
     sqlite3_stmt* myStatement; 
 
-    //get a statement to iterate through 
+    //get a statement to iterate through
 	if (prepareQueryWithResults(sql, myStatement)) 
-	{ 
-        // acts as a placeholder for the ? above 
+	{
+        // acts as a placeholder for the ? above
         sqlite3_bind_int(myStatement, 1, courseId);
         sqlite3_bind_text(myStatement, 2, date.c_str(), -1, SQLITE_TRANSIENT);
 
@@ -188,6 +188,7 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
             string courseName((char*)sqlite3_column_text(myStatement, 3));  // 3 = column 4
             string meetingDate((char*)sqlite3_column_text(myStatement, 4)); // 4 = column 5
 	
+
 			//print out the display
 			cout << "Course: " << courseName
                  << " | Date: " << meetingDate

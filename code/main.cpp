@@ -11,7 +11,7 @@ int main()
 {
 
     //Comments are where queries need to be added 
-    
+
     string selection = "1";
     
     while(selection != "5") {
@@ -212,7 +212,7 @@ void takeAttendance() {
 
     string answer;
 
-    cout<<"Would you like to view another attendance record? (y/n)"<<endl;
+    cout<<"Would you like to take attendance for another student? (y/n)"<<endl;
     cin >> answer;
 
     if(answer == "y") {

@@ -9,6 +9,9 @@ void takeAttendance();
 
 int main()
 {
+
+    //Comments are where queries need to be added 
+    
     string selection = "1";
     
     while(selection != "5") {
@@ -74,6 +77,7 @@ void addClass() {
 
     cout<<"Enter in the year the course is offered: (Just a number)"<<endl;
     cin >> yearOffered;
+    stoi(yearOffered);
 
     cout<<"Enter in the meeting schedule: (ex: MWF, TTR)"<<endl;
     cin >> meetingSchedule;
@@ -89,7 +93,7 @@ void addClass() {
 
     //Add to database
 
-    cout<<"Class successfully added! ✓";
+    cout<<"Class successfully added! ✓"<<endl;
 
     string answer;
 
@@ -119,7 +123,7 @@ void addStudent() {
 
     //Add to database
 
-    cout<<"Student successfully added! ✓";
+    cout<<"Student successfully added! ✓"<<endl;
 
     string answer;
 
@@ -145,6 +149,7 @@ void viewStudents() {
 
     cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
     cin >> courseID;
+    stoi(courseID);
 
     cout<<"Enter in the day that you want to view attendance for: (format: MM/DD/YYYY)"<<endl;
     cin >> date;
@@ -175,11 +180,13 @@ void takeAttendance() {
 
     cout<<"Enter in the ID of the course you wish to take attendance for: "<<endl;
     cin >> courseID;
+    stoi(courseID);
 
     //Print out all students and their ID's
 
     cout<<"Enter in the ID of the student you wish to view attendance for: "<<endl;
     cin >> studentID;
+    stoi(studentID);
 
     string meetingDate;
     string meetingTime;
@@ -197,8 +204,11 @@ void takeAttendance() {
     cout<<"3) Absent: Excused"<<endl;
     cout<<"4) Absent: Unexcused"<<endl;
     cin >> attendanceStatus;
+    stoi(attendanceStatus);
 
     //Add Attendance Record
+
+    cout<<"Attendance successfully submitted ✓"<<endl;
 
     string answer;
 

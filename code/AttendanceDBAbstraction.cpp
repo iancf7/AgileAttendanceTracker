@@ -161,7 +161,7 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
                  "   Students.firstName, "
                  "   Students.lastName, "
                  "   AttendanceRecords.attendanceStatus, "
-                 "   Courses.courseName, "
+                 "   Courses.name, "
                  "   AttendanceRecords.meetingDate"
                  "FROM AttendanceRecords" 
                  "JOIN Students ON Students.studentId = AttendanceRecords.studentId"

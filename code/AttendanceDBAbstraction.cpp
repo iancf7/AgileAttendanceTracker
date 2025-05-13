@@ -14,7 +14,12 @@ AttendanceDBAbstraction::AttendanceDBAbstraction(string pathToFile)
 }
 //--
 void AttendanceDBAbstraction::createStudentsTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS Students (studentId INTEGER PRIMARY KEY NOT NULL, firstName TEXT, lastName TEXT, attendanceRecordId INTEGER);";
+    string sql = "CREATE TABLE IF NOT EXISTS Students ( "
+                 "  studentId INTEGER PRIMARY KEY NOT NULL, "
+                 "  firstName TEXT, "
+                 "  lastName TEXT, "
+                 "  attendanceRecordId INTEGER "
+                 ");";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -24,7 +29,17 @@ void AttendanceDBAbstraction::createStudentsTable() {
 }
 //--
 void AttendanceDBAbstraction::createCoursesTable() {
-    string sql = "CREATE TABLE IF NOT EXISTS Courses (courseId INTEGER PRIMARY KEY NOT NULL, name TEXT, semester TEXT, year INTEGER, meetingSchedule TEXT, startTime TEXT, endTime TEXT, instructor TEXT, attendanceRecordId INTEGER);";
+    string sql = "CREATE TABLE IF NOT EXISTS Courses ( "
+                 "  courseId INTEGER PRIMARY KEY NOT NULL, "
+                 "  name TEXT, "
+                 "  semester TEXT, "
+                 "  year INTEGER, "
+                 "  meetingSchedule TEXT, "
+                 "  startTime TEXT, "
+                 "  endTime TEXT, " 
+                 "  instructor TEXT, "
+                 "  attendanceRecordId INTEGER "
+                 ");";
      
     //execute the query to create the table
     if (!executeQueryNoResultsBack(sql))
@@ -54,7 +69,8 @@ void AttendanceDBAbstraction::createAttendanceRecordsTable() {
 //--
 void AttendanceDBAbstraction::insertStudent(string firstName, string lastName) {
     //query to insert a user
-    string sql = "INSERT INTO Students (firstName, lastName) VALUES (?, ?);";
+    string sql = "INSERT INTO Students (firstName, lastName) "
+                 " VALUES (?, ?);";
  
     //create a statement pointer
     sqlite3_stmt* myStatement;
@@ -79,7 +95,8 @@ void AttendanceDBAbstraction::insertStudent(string firstName, string lastName) {
 //--
 void AttendanceDBAbstraction::insertCourse(string name, string semester, int year, string meetingSchedule, string startTime, string endTime, string instructor) {
     //query to insert a user
-    string sql = "INSERT INTO Courses (name, semester, year, meetingSchedule, startTime, endTime, instructor) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    string sql = "INSERT INTO Courses (name, semester, year, meetingSchedule, startTime, endTime, instructor) "
+                 " VALUES (?, ?, ?, ?, ?, ?, ?);";
  
     //create a statement pointer
     sqlite3_stmt* myStatement;
@@ -109,7 +126,8 @@ void AttendanceDBAbstraction::insertCourse(string name, string semester, int yea
 //--
 void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus, int courseId, int studentId) {
     //query to insert a user
-    string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus, courseId, studentId) VALUES (?, ?, ?, ?, ?);";
+    string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus, courseId, studentId) "
+                 " VALUES (?, ?, ?, ?, ?);";
  
     //create a statement pointer
     sqlite3_stmt* myStatement;
@@ -139,7 +157,12 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
     // pick a course, pick a day, show all absences for that given day 
 
     // query to get all attendance records for a given class
-    string sql = "SELECT Students.firstName, Students.lastName, AttendanceRecords.attendanceStatus, Courses.courseName, AttendanceRecords.meetingDate"
+    string sql = "SELECT "
+                 "   Students.firstName, "
+                 "   Students.lastName, "
+                 "   AttendanceRecords.attendanceStatus, "
+                 "   Courses.courseName, "
+                 "   AttendanceRecords.meetingDate"
                  "FROM AttendanceRecords" 
                  "JOIN Students ON Students.studentId = AttendanceRecords.studentId"
                  "JOIN Courses ON Courses.courseId = AttendanceRecords.courseId"
@@ -186,7 +209,11 @@ void AttendanceDBAbstraction::getMostFrequentlyAbsent() {
     //list all students, with the top being the student with the most absences, and then descending down from there. 
 
 	//query to get the students with the most absences
-	string sql = "SELECT Students.studentId, Students.firstName, Students.lastName, COUNT(*) AS absenceCount"
+	string sql = "SELECT "
+                 "   Students.studentId, "
+                 "   Students.firstName, "
+                 "   Students.lastName, "
+                 "   COUNT(*) AS absenceCount "
                  "FROM AttendanceRecord"
                  "JOIN Students ON Students.studentId = AttendanceRecords.studentId"
                  "WHERE AttendanceRecord.attendanceStatus = 'Absent'"

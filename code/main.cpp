@@ -141,6 +141,8 @@ void viewStudents() {
     cout<<"=           View Students            ="<<endl;
     cout<<"======================================"<<endl;
 
+    //Print out all courses and their ID's
+
     cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
     cin >> courseID;
 
@@ -162,8 +164,51 @@ void viewStudents() {
 
 void takeAttendance() {
 
+    string courseID;
+    string studentID;
+
     cout<<"======================================"<<endl;
     cout<<"=          Take Attendance           ="<<endl;
     cout<<"======================================"<<endl;
 
+    //Print out all courses and their ID's
+
+    cout<<"Enter in the ID of the course you wish to take attendance for: "<<endl;
+    cin >> courseID;
+
+    //Print out all students and their ID's
+
+    cout<<"Enter in the ID of the student you wish to view attendance for: "<<endl;
+    cin >> studentID;
+
+    string meetingDate;
+    string meetingTime;
+    string attendanceStatus;
+
+    cout<<"Enter in the class date: (format: MM/DD/YYYY)"<<endl;
+    cin >> meetingDate;
+
+    cout<<"Enter in the class time: (format: XX:XX AM/PM)"<<endl;
+    cin >> meetingTime;
+
+    cout<<"Enter in the student's attendance status: "<<endl;
+    cout<<"1) Present"<<endl;
+    cout<<"2) Late"<<endl;
+    cout<<"3) Absent: Excused"<<endl;
+    cout<<"4) Absent: Unexcused"<<endl;
+    cin >> attendanceStatus;
+
+    //Add Attendance Record
+
+    string answer;
+
+    cout<<"Would you like to view another attendance record? (y/n)"<<endl;
+    cin >> answer;
+
+    if(answer == "y") {
+
+        takeAttendance();
+    }
 }
+
+

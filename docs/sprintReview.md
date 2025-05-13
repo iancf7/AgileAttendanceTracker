@@ -1,18 +1,18 @@
 ## Sprint Retrospective Document
 
-### Sprint #X:
+### Sprint 1:
 - **Completed User Stories:**
-  - [List completed user stories]
+  - None
 - **Demo Summary:**
-  - [Summarize demo results if applicable]
+  - Menuing works but nothing is being added right now to a database.
 - **Unfinished Work:**
-  - [List items that were not completed and why]
+  - Database is still being worked on along with a few other menu things.
 - **Stakeholder Feedback:**
   - [Feedback from the review meeting]
 - **Process**
   - **Start:**
-    - [What should we start doing?]
+    - Priority #1: finish Database and SQL queries.
   - **Stop:**
-    - [What should we stop doing?]
+    - 
   - **Continue:**
-    - [What worked well and should continue?]
+    - Communicating effectively

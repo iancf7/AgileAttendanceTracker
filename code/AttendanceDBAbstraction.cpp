@@ -107,9 +107,9 @@ void AttendanceDBAbstraction::insertCourse(string name, string semester, int yea
     }
 }
 //--
-void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus) {
+void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus, int courseId, int studentId) {
     //query to insert a user
-    string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus, courseId, studentId) VALUES (?, ?, ?);";
+    string sql = "INSERT INTO AttendanceRecords (meetingDate, meetingTime, attendanceStatus, courseId, studentId) VALUES (?, ?, ?, ?, ?);";
  
     //create a statement pointer
     sqlite3_stmt* myStatement;
@@ -124,7 +124,9 @@ void AttendanceDBAbstraction::insertAttendanceRecord(string meetingDate, string 
         sqlite3_bind_text(myStatement, 1, meetingDate.c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(myStatement, 2, meetingTime.c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(myStatement, 3, attendanceStatus.c_str(), -1, SQLITE_STATIC);
- 
+        sqlite3_bind_int(myStatement, 4, courseId);
+        sqlite3_bind_int(myStatement, 5, studentId);
+
         //execute the query to insert a new user
         if (!executeQueryNoResultsBack(myStatement))
         {

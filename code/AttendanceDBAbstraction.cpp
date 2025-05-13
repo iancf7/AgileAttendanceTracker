@@ -204,20 +204,22 @@ void AttendanceDBAbstraction::getAllAttendanceRecordsByCourseByDate(int courseId
 	} 
 }
 //--
-void AttendanceDBAbstraction::getMostFrequentlyAbsent() {
-    //list all students, with the top being the student with the most absences, and then descending down from there. 
+void AttendanceDBAbstraction::getMostFrequentlyAbsent(int courseId) {
+    //list all students, with the top being the student with the most absences, and then descending down from there.
 
 	//query to get the students with the most absences
-	string sql = "SELECT "
+	string sql = "   SELECT "
+                 "   AttendanceRecords.courseId, "
                  "   Students.studentId, "
                  "   Students.firstName, "
                  "   Students.lastName, "
                  "   COUNT(*) AS absenceCount "
-                 "FROM AttendanceRecord"
-                 "JOIN Students ON Students.studentId = AttendanceRecords.studentId"
-                 "WHERE AttendanceRecord.attendanceStatus = 'Absent'"
-                 "GROUP BY AttendanceRecords.studentId"
-                 "ORDER BY absenceCount DESC;"; 
+                 "   FROM AttendanceRecords "
+                 "   JOIN Students ON Students.studentId = AttendanceRecords.studentId "
+                 "   WHERE AttendanceRecords.courseId = ? "
+                 "   AND AttendanceRecords.attendanceStatus = 'Absent' "
+                 "   GROUP BY AttendanceRecords.studentId "
+                 "   ORDER BY absenceCount DESC;";
  
 	//create a statement pointer 
 	sqlite3_stmt* myStatement; 
@@ -225,16 +227,16 @@ void AttendanceDBAbstraction::getMostFrequentlyAbsent() {
 	//get a statement to iterate through 
 	if (prepareQueryWithResults(sql, myStatement)) 
 	{
-		//get a row from the query 
+        sqlite3_bind_int(myStatement, 1, courseId);
+		//get a row from the query
 		int statusOfStep = sqlite3_step(myStatement); 
  
 		//while there are more rows 
 		while (statusOfStep == SQLITE_ROW) 
-        { 
-            
+        {
             int studentId = sqlite3_column_int(myStatement, 0);           // 0 = column 1
-            string firstName((char*)sqlite3_column_text(myStatement, 0)); // 1 = column 2
-            string lastName((char*)sqlite3_column_text(myStatement, 1));  // 2 = column 3
+            string firstName((char*)sqlite3_column_text(myStatement, 1)); // 1 = column 2
+            string lastName((char*)sqlite3_column_text(myStatement, 2));  // 2 = column 3
             int absenceCount = sqlite3_column_int(myStatement, 3);        // 3 = column 4
             
             //print out the display

@@ -10,6 +10,7 @@ int main()
     db.insertAttendanceRecord("05/13/2025", "12:30", "Present", 1, 1);*/
     
     db.getAllAttendanceRecordsByCourseByDate(1, "05/13/2025");
+    db.getMostFrequentlyAbsent(1);
     return 0;
     
 }

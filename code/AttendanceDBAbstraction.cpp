@@ -263,7 +263,7 @@ void AttendanceDBAbstraction::getStudentsAlphabetically(int courseId) {
                  "   FROM AttendanceRecords "
                  "   JOIN Students ON Students.studentId = AttendanceRecords.studentId "
                  "   WHERE AttendanceRecords.courseId = ? "
-                 "   ORDER BY Students.lastName DESC;";
+                 "   ORDER BY Students.lastName ASC;";
     
 	//create a statement pointer 
 	sqlite3_stmt* myStatement; 

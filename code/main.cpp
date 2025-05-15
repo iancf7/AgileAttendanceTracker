@@ -1,16 +1,16 @@
 #include <iostream>
 #include <string>
+#include "AttendanceDBAbstraction.h"
 using namespace std;
 
 void addClass();
 void addStudent();
 void viewAttendance();
 void takeAttendance();
+AttendanceDBAbstraction db("/Users/maddi/Downloads/Attendance.sqlite");
 
 int main()
 {
-    //Comments are where queries need to be added 
-
     string selection = "1";
     
     while(selection != "5") {
@@ -57,7 +57,7 @@ void addClass() {
 
     string courseName;
     string semesterOffered;
-    string yearOffered;
+    int yearOffered;
     string meetingSchedule;
     string startTime;
     string endTime;
@@ -75,7 +75,6 @@ void addClass() {
 
     cout<<"Enter in the year the course is offered: (Just a number)"<<endl;
     cin >> yearOffered;
-    stoi(yearOffered);
 
     cout<<"Enter in the meeting schedule: (ex: MWF, TTR)"<<endl;
     cin >> meetingSchedule;
@@ -90,6 +89,7 @@ void addClass() {
     cin >> instructor;
 
     //Add to database
+    db.insertCourse(courseName, semesterOffered, yearOffered, meetingSchedule, startTime, endTime, instructor);
 
     cout<<"Class successfully added! ✓"<<endl;
 
@@ -120,6 +120,7 @@ void addStudent() {
     cin >> lastName;
 
     //Add to database
+    db.insertStudent(firstName, lastName);
 
     cout<<"Student successfully added! ✓"<<endl;
 
@@ -136,7 +137,7 @@ void addStudent() {
 
 void viewAttendance() {
 
-    string courseID;
+    int courseID;
     string date;
 
     cout<<"======================================"<<endl;
@@ -147,12 +148,12 @@ void viewAttendance() {
 
     cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
     cin >> courseID;
-    stoi(courseID);
 
     cout<<"Enter in the day that you want to view attendance for: (format: MM/DD/YYYY)"<<endl;
     cin >> date;
 
     //Query Database
+    db.getAllAttendanceRecordsByCourseByDate(courseID, date);
 
     string answer;
 
@@ -167,8 +168,8 @@ void viewAttendance() {
 
 void takeAttendance() {
 
-    string courseID;
-    string studentID;
+    int courseID;
+    int studentID;
 
     cout<<"======================================"<<endl;
     cout<<"=          Take Attendance           ="<<endl;
@@ -178,13 +179,11 @@ void takeAttendance() {
 
     cout<<"Enter in the ID of the course you wish to take attendance for: "<<endl;
     cin >> courseID;
-    stoi(courseID);
 
     //Print out all students and their ID's
 
     cout<<"Enter in the ID of the student you wish to view attendance for: "<<endl;
     cin >> studentID;
-    stoi(studentID);
 
     string meetingDate;
     string meetingTime;
@@ -205,6 +204,7 @@ void takeAttendance() {
     stoi(attendanceStatus);
 
     //Add Attendance Record
+    db.insertAttendanceRecord(meetingDate, meetingTime, attendanceStatus, courseID, studentID);
 
     cout<<"Attendance successfully submitted ✓"<<endl;
 
@@ -218,5 +218,3 @@ void takeAttendance() {
         takeAttendance();
     }
 }
-
-

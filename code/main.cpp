@@ -26,7 +26,7 @@ int main()
         cout<<"5) Quit"<<endl;
         cout<<"======================================"<<endl;
 
-        cin >> selection;
+        getline(cin, selection);
 
         if(selection == "1") {
             addClass();
@@ -57,7 +57,7 @@ void addClass() {
 
     string courseName;
     string semesterOffered;
-    int yearOffered;
+    string yearOffered;
     string meetingSchedule;
     string startTime;
     string endTime;
@@ -68,35 +68,35 @@ void addClass() {
     cout<<"======================================"<<endl;
 
     cout<<"Enter in the name of the course: "<<endl;
-    cin >> courseName;
+    getline(cin, courseName);
 
     cout<<"Enter in the semester the course is offered (ex: Fall)"<<endl;
-    cin >> semesterOffered;
+    getline(cin, semesterOffered);
 
     cout<<"Enter in the year the course is offered: (Just a number)"<<endl;
-    cin >> yearOffered;
+    getline(cin, yearOffered);
 
     cout<<"Enter in the meeting schedule: (ex: MWF, TTR)"<<endl;
-    cin >> meetingSchedule;
+    getline(cin, meetingSchedule);
 
     cout<<"Enter in the start time of the course: (format: HH:MM:AM/PM)"<<endl;
-    cin >> startTime;
+    getline(cin, startTime);
 
     cout<<"Enter in the end time of the course: (format: HH:MM:AM/PM)"<<endl;
-    cin >> endTime;
+    getline(cin, endTime);
 
     cout<<"Enter in the name of the course instructor: "<<endl;
-    cin >> instructor;
+    getline(cin, instructor);
 
     //Add to database
-    db.insertCourse(courseName, semesterOffered, yearOffered, meetingSchedule, startTime, endTime, instructor);
+    db.insertCourse(courseName, semesterOffered, stoi(yearOffered), meetingSchedule, startTime, endTime, instructor);
 
     cout<<"Class successfully added! ✓"<<endl;
 
     string answer;
 
     cout<<"Would you like to add another class? (y/n)"<<endl;
-    cin >> answer;
+    getline(cin, answer);
 
     if(answer == "y") {
 
@@ -114,10 +114,10 @@ void addStudent() {
     cout<<"======================================"<<endl;
 
     cout<<"Enter in the student's first name: "<<endl;
-    cin >> firstName;
+    getline(cin, firstName);
 
     cout<<"Enter in the student's last name: "<<endl;
-    cin >> lastName;
+    getline(cin, lastName);
 
     //Add to database
     db.insertStudent(firstName, lastName);
@@ -127,7 +127,7 @@ void addStudent() {
     string answer;
 
     cout<<"Would you like to add another class? (y/n)"<<endl;
-    cin >> answer;
+    getline(cin, answer);
 
     if(answer == "y") {
 
@@ -137,7 +137,7 @@ void addStudent() {
 
 void viewAttendance() {
 
-    int courseID;
+    string courseID;
     string date;
     string selection = "1";
 
@@ -148,39 +148,39 @@ void viewAttendance() {
     cout<<"1. View attendance by date"<<endl;
     cout<<"2. View attendance by most frequently absent students"<<endl;
     
-    cin >> selection;
+    getline(cin, selection);
     while(selection != "1" && selection != "2") {
         cout<<"Invalid selection, please enter an option:"<<endl;
         cout<<"1. View attendance by date"<<endl;
         cout<<"2. View attendance by most frequently absent students"<<endl;
         
-        cin >> selection;
+        getline(cin, selection);
     }
     
     if(selection == "1") {
         //Print out all courses and their ID's
         
         cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
-        cin >> courseID;
+        getline(cin, courseID);
         
         cout<<"Enter in the day that you want to view attendance for: (format: MM/DD/YYYY)"<<endl;
-        cin >> date;
+        getline(cin, date);
         
         //Query Database
-        db.getAllAttendanceRecordsByCourseByDate(courseID, date);
+        db.getAllAttendanceRecordsByCourseByDate(stoi(courseID), date);
     }
     else if(selection == "2") {
         cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
-        cin >> courseID;
+        getline(cin, courseID);
         
         //Query Database
-        db.getMostFrequentlyAbsent(courseID);
+        db.getMostFrequentlyAbsent(stoi(courseID));
     }
 
     string answer;
 
     cout<<"Would you like to view another attendance record? (y/n)"<<endl;
-    cin >> answer;
+    getline(cin, answer);
 
     if(answer == "y") {
 
@@ -190,8 +190,8 @@ void viewAttendance() {
 
 void takeAttendance() {
 
-    int courseID;
-    int studentID;
+    string courseID;
+    string studentID;
 
     cout<<"======================================"<<endl;
     cout<<"=          Take Attendance           ="<<endl;
@@ -200,40 +200,39 @@ void takeAttendance() {
     //Print out all courses and their ID's
 
     cout<<"Enter in the ID of the course you wish to take attendance for: "<<endl;
-    cin >> courseID;
+    getline(cin, courseID);
 
     //Print out all students and their ID's
 
     cout<<"Enter in the ID of the student you wish to view attendance for: "<<endl;
-    cin >> studentID;
+    getline(cin, studentID);
 
     string meetingDate;
     string meetingTime;
     string attendanceStatus;
 
     cout<<"Enter in the class date: (format: MM/DD/YYYY)"<<endl;
-    cin >> meetingDate;
+    getline(cin, meetingDate);
 
     cout<<"Enter in the class time: (format: HH:MM:AM/PM)"<<endl;
-    cin >> meetingTime;
+    getline(cin, meetingTime);
 
     cout<<"Enter in the student's attendance status: "<<endl;
     cout<<"1) Present"<<endl;
     cout<<"2) Late"<<endl;
     cout<<"3) Absent: Excused"<<endl;
     cout<<"4) Absent: Unexcused"<<endl;
-    cin >> attendanceStatus;
-    stoi(attendanceStatus);
+    getline(cin, attendanceStatus);
 
     //Add Attendance Record
-    db.insertAttendanceRecord(meetingDate, meetingTime, attendanceStatus, courseID, studentID);
+    db.insertAttendanceRecord(meetingDate, meetingTime, attendanceStatus, stoi(courseID), stoi(studentID));
 
     cout<<"Attendance successfully submitted ✓"<<endl;
 
     string answer;
 
     cout<<"Would you like to take attendance for another student? (y/n)"<<endl;
-    cin >> answer;
+    getline(cin, answer);
 
     if(answer == "y") {
 

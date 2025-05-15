@@ -139,21 +139,43 @@ void viewAttendance() {
 
     int courseID;
     string date;
+    string selection = "1";
 
     cout<<"======================================"<<endl;
     cout<<"=           View Attendance          ="<<endl;
     cout<<"======================================"<<endl;
-
-    //Print out all courses and their ID's
-
-    cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
-    cin >> courseID;
-
-    cout<<"Enter in the day that you want to view attendance for: (format: MM/DD/YYYY)"<<endl;
-    cin >> date;
-
-    //Query Database
-    db.getAllAttendanceRecordsByCourseByDate(courseID, date);
+    cout<<"Please enter an option:"<<endl;
+    cout<<"1. View attendance by date"<<endl;
+    cout<<"2. View attendance by most frequently absent students"<<endl;
+    
+    cin >> selection;
+    while(selection != "1" && selection != "2") {
+        cout<<"Invalid selection, please enter an option:"<<endl;
+        cout<<"1. View attendance by date"<<endl;
+        cout<<"2. View attendance by most frequently absent students"<<endl;
+        
+        cin >> selection;
+    }
+    
+    if(selection == "1") {
+        //Print out all courses and their ID's
+        
+        cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
+        cin >> courseID;
+        
+        cout<<"Enter in the day that you want to view attendance for: (format: MM/DD/YYYY)"<<endl;
+        cin >> date;
+        
+        //Query Database
+        db.getAllAttendanceRecordsByCourseByDate(courseID, date);
+    }
+    else if(selection == "2") {
+        cout<<"Enter in the ID of the course you wish to view attendance records of: "<<endl;
+        cin >> courseID;
+        
+        //Query Database
+        db.getMostFrequentlyAbsent(courseID);
+    }
 
     string answer;
 

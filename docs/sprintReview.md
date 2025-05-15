@@ -16,3 +16,21 @@
     - N/A
   - **Continue:**
     - Communicating effectively
+
+
+### Sprint 2:
+- **Completed User Stories:**
+  - US-1, US-2, US-3
+- **Demo Summary:**
+  - Gave demo to customer (about 80% of the way there)
+- **Unfinished Work:**
+  - Not very user friendly at the moment
+- **Stakeholder Feedback:**
+  - Customer was satisfied with current progress
+- **Process**
+  - **Start:**
+    - We're "done"
+  - **Stop:**
+    - N/A
+  - **Continue:**
+    - N/A

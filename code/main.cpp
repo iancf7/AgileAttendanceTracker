@@ -20,7 +20,7 @@ int main()
         cout<<"======================================"<<endl;
         cout<<"Please enter an option:"<<endl;
         cout<<"1) Add a class"<<endl;
-        cout<<"2) Add a student to a class"<<endl;
+        cout<<"2) Add a student"<<endl;
         cout<<"3) View the attendance for a class"<<endl;
         cout<<"4) Take attendance for a class"<<endl;
         cout<<"5) Quit"<<endl;

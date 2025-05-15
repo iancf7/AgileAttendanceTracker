@@ -9,7 +9,6 @@ void takeAttendance();
 
 int main()
 {
-
     //Comments are where queries need to be added 
 
     string selection = "1";
@@ -50,7 +49,6 @@ int main()
         }
 
     }
-
     return 0;
 
 }

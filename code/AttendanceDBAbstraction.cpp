@@ -252,3 +252,44 @@ void AttendanceDBAbstraction::getMostFrequentlyAbsent(int courseId) {
 		sqlite3_finalize(myStatement); 
 	} 
 }
+//- 
+void AttendanceDBAbstraction::getStudentsAlphabetically(int courseId) {
+    // pick a course and get all students for that given course 
+
+    string sql = "   SELECT "
+                 "   Students.studentId, "
+                 "   Students.firstName, "
+                 "   Students.lastName "
+                 "   FROM AttendanceRecords "
+                 "   JOIN Students ON Students.studentId = AttendanceRecords.studentId "
+                 "   WHERE AttendanceRecords.courseId = ? "
+                 "   ORDER BY Students.lastName DESC;";
+    
+	//create a statement pointer 
+	sqlite3_stmt* myStatement; 
+ 
+	//get a statement to iterate through 
+	if (prepareQueryWithResults(sql, myStatement)) 
+	{
+        sqlite3_bind_int(myStatement, 1, courseId);
+		//get a row from the query
+		int statusOfStep = sqlite3_step(myStatement); 
+ 
+		//while there are more rows 
+		while (statusOfStep == SQLITE_ROW) 
+        {         
+            int studentId = sqlite3_column_int(myStatement, 0);           // 1 = column 1
+            string firstName((char*)sqlite3_column_text(myStatement, 1)); // 2 = column 2
+            string lastName((char*)sqlite3_column_text(myStatement, 2));  // 3 = column 3
+            
+            //print out the display
+            cout << "Student ID: " << studentId
+            << " | Student: " << firstName << " " << lastName << endl; 
+            
+			//get the next row 
+			statusOfStep = sqlite3_step(myStatement); 
+        }
+		//clean up and destroy the statement 
+		sqlite3_finalize(myStatement); 
+	} 
+}

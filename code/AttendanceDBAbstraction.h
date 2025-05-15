@@ -12,6 +12,7 @@ public:
     void insertAttendanceRecord(string meetingDate, string meetingTime, string attendanceStatus, int courseId, int studentId);
     void getAllAttendanceRecordsByCourseByDate(int courseId, string date);
     void getMostFrequentlyAbsent(int courseId); 
+    void getStudentsAlphabetically(int courseId);
     
 private:
     void createStudentsTable();

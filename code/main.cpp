@@ -7,13 +7,14 @@ void addClass();
 void addStudent();
 void viewAttendance();
 void takeAttendance();
+void viewStudents();
 AttendanceDBAbstraction db("/Users/maddi/Downloads/Attendance.sqlite");
 
 int main()
 {
     string selection = "1";
     
-    while(selection != "5") {
+    while(selection != "6") {
 
         cout<<"======================================"<<endl;
         cout<<"= Welcome to the Attendance Tracker! ="<<endl;
@@ -23,7 +24,8 @@ int main()
         cout<<"2) Add a student"<<endl;
         cout<<"3) View the attendance for a class"<<endl;
         cout<<"4) Take attendance for a class"<<endl;
-        cout<<"5) Quit"<<endl;
+        cout<<"5) View students in a class"<<endl;
+        cout<<"6) Quit"<<endl;
         cout<<"======================================"<<endl;
 
         getline(cin, selection);
@@ -42,6 +44,10 @@ int main()
 
         if(selection == "4") {
             takeAttendance();
+        }
+        
+        if(selection == "5") {
+            viewStudents();
         }
 
         if(selection >= "a" && selection <= "Z") {
@@ -202,8 +208,6 @@ void takeAttendance() {
     cout<<"Enter in the ID of the course you wish to take attendance for: "<<endl;
     getline(cin, courseID);
 
-    //Print out all students and their ID's
-
     cout<<"Enter in the ID of the student you wish to view attendance for: "<<endl;
     getline(cin, studentID);
 
@@ -237,5 +241,29 @@ void takeAttendance() {
     if(answer == "y") {
 
         takeAttendance();
+    }
+}
+
+void viewStudents()
+{
+    string courseID;
+    
+    cout<<"======================================"<<endl;
+    cout<<"=          View Students             ="<<endl;
+    cout<<"======================================"<<endl;
+    
+    cout<<"Enter in the ID of the course you wish to view the students of: "<<endl;
+    getline(cin, courseID);
+    
+    db.getStudentsAlphabetically(stoi(courseID));
+
+    string answer;
+
+    cout<<"Would you like to view another course? (y/n)"<<endl;
+    getline(cin, answer);
+
+    if(answer == "y") {
+
+        viewStudents();
     }
 }

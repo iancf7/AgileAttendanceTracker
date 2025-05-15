@@ -80,10 +80,10 @@ void addClass() {
     cout<<"Enter in the meeting schedule: (ex: MWF, TTR)"<<endl;
     cin >> meetingSchedule;
 
-    cout<<"Enter in the start time of the course: (format: XX:XX AM/PM)"<<endl;
+    cout<<"Enter in the start time of the course: (format: HH:MM:AM/PM)"<<endl;
     cin >> startTime;
 
-    cout<<"Enter in the end time of the course: (format: XX:XX AM/PM)"<<endl;
+    cout<<"Enter in the end time of the course: (format: HH:MM:AM/PM)"<<endl;
     cin >> endTime;
 
     cout<<"Enter in the name of the course instructor: "<<endl;
@@ -193,7 +193,7 @@ void takeAttendance() {
     cout<<"Enter in the class date: (format: MM/DD/YYYY)"<<endl;
     cin >> meetingDate;
 
-    cout<<"Enter in the class time: (format: XX:XX AM/PM)"<<endl;
+    cout<<"Enter in the class time: (format: HH:MM:AM/PM)"<<endl;
     cin >> meetingTime;
 
     cout<<"Enter in the student's attendance status: "<<endl;
